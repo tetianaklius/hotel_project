@@ -1,0 +1,15 @@
+.idea
+.venv
+mysql
+.env
+client
+mysql2
+/backend/apps/auth/migrations/
+/backend/apps/booking/migrations/
+/backend/apps/category/migrations/
+/backend/apps/city/migrations/
+/backend/apps/region/migrations/
+/backend/apps/review/migrations/
+/backend/apps/room/migrations/
+/backend/apps/room_type/migrations/
+/backend/apps/user/migrations/
