@@ -3,6 +3,7 @@
 mysql
 .env
 client
+/node_modules
 mysql2
 /backend/apps/auth/migrations/
 /backend/apps/booking/migrations/
