@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from apps.user.filters import UsersFilter
 from apps.user.models import ProfileModel
 from apps.user.serializers import UserModelSerializer, ProfileModelSerializer, OwnProfileSerializer
-from core.pagination import CustomPagePagination
-
+from core.pagination.pagination import CustomPagePagination
 from core.permissions.is_admin import IsAdmin
 
 UserModel = get_user_model()

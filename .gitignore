@@ -4,7 +4,6 @@ mysql
 .env
 client
 /node_modules
-mysql2
 /backend/apps/auth/migrations/
 /backend/apps/booking/migrations/
 /backend/apps/category/migrations/
@@ -14,3 +13,5 @@ mysql2
 /backend/apps/room/migrations/
 /backend/apps/room_type/migrations/
 /backend/apps/user/migrations/
+/backend/apps/profile_staff/migrations/
+/backend/apps/staff_role/migrations/

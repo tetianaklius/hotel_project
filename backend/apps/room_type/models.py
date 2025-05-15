@@ -1,6 +1,7 @@
 from django.db import models
-from core.models import BaseModel
 from django.core import validators as v
+
+from core.models import BaseModel
 
 
 class RoomTypeModel(BaseModel):  # single double triple quadruple
