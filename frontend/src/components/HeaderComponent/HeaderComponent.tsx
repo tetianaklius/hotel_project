@@ -1,0 +1,58 @@
+import React from 'react';
+import {useNavigate} from "react-router-dom";
+
+import styles from "./HeaderComponent.module.css"
+
+const HeaderComponent = () => {
+    const navigate = useNavigate();
+
+    const BackButton = () => {
+        navigate(-1);
+    }
+
+    return (
+        <div className={styles.header_common}>
+            <div
+                onClick={() => BackButton()}
+                className={styles.back_button}
+            >Назад&laquo;&laquo;&laquo;
+            </div>
+            <div className={styles.logo_box}
+                 onClick={() => {
+                     navigate("home");
+                 }}>
+                <img src="" alt="логотип сайту"/>
+            </div>
+            <div className={styles.navbar}>
+                <div className={styles.navbar_item}
+                     onClick={() => {
+                         navigate("rooms");
+                     }}>
+                    Номери
+                </div>
+                <div className={styles.navbar_item}>
+                    Забронювати (на сторінку пошуку номерів)
+                </div>
+                {/*<div className={styles.navbar_item}>*/}
+                {/*    Акції*/}
+                {/*</div>*/}
+                <div className={styles.navbar_item}>
+                    Локація (до ґуґл-карти)
+                </div>
+                <div className={styles.navbar_item}>
+                    Телефон (розгорточка і є кнопка скопіювати)
+                </div>
+                {/*<div className={styles.navbar_item}>*/}
+                {/*    Мова (укр, англ)*/}
+                {/*</div>*/}
+                {/*<div className={styles.navbar_item}>*/}
+                {/*    тема? світла, темна*/}
+                {/*</div>*/}
+
+            </div>
+
+        </div>
+    );
+};
+
+export default HeaderComponent;
