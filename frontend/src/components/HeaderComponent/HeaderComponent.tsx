@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 
 import styles from "./HeaderComponent.module.css"
 
-const HeaderComponent = () => {
+const HeaderComponent: FC = () => {
     const navigate = useNavigate();
 
     const BackButton = () => {

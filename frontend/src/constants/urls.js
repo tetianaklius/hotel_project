@@ -19,11 +19,11 @@ export const urls = {
     },
     rooms: {
         create: "/rooms/create",
-        list_for_user: "/rooms",
-        search_: (page, params) => `/rooms?page=${page}&${params}`,  // todo
-        list_for_admin: "/rooms/internal",
+        all_for_user: "/rooms",
+        all_for_admin: "/rooms/internal",
         by_id_for_user: (id) => `/rooms/${id}`,
         by_id_for_admin: (id) => `/rooms/${id}/internal`,
+        search: (page, params) => `/rooms?page=${page}&${params}`,  // todo
     },
     regions: {
         all: "/regions",

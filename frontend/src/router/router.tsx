@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouteObject} from "react-router-dom";
 
 import {MainLayout} from "../layouts/MainLayout/MainLayout";
 import {ErrorLayout} from "../layouts/ErrorLayout/ErrorLayout";
@@ -11,13 +11,14 @@ import {BookingPage} from "../pages/BookingPage/BookingPage";
 import {SearchRoomsPage} from "../pages/SearchRoomsPage/SearchRoomsPage";
 
 
-export const router = createBrowserRouter(
+const routes: RouteObject[] =
     [
         {
             path: "/",
             element: <MainLayout/>,
             errorElement: <ErrorLayout/>,
             children: [
+                {index: true, element: <Navigate to={"home"}/>},
                 {path: "login",element: <LoginPage/>},
                 {path: "registration",element: <RegistrationPage/>},
                 {path: "home",element: <WelcomePage/>},
@@ -31,4 +32,5 @@ export const router = createBrowserRouter(
             ]
         }
     ]
-)
+
+export const router = createBrowserRouter(routes);

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-const FooterComponent = () => {
+const FooterComponent: FC = () => {
     return (
         <div>
             FooterComponent
