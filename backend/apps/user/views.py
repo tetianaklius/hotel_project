@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from apps.city.models import CityModel
 from apps.user.filters import UsersFilter
 from apps.user.models import ProfileModel
 from apps.user.serializers import UserModelSerializer, ProfileModelSerializer, OwnProfileSerializer
@@ -26,9 +27,9 @@ class UserCreateView(GenericAPIView):
         data = self.request.data
         context_ = {}
 
-        # if "city" in data["profile"]:
-        #     city_obj = get_object_or_404(CityModel, value=data["profile"]["city"])
-        #     context_["city"] = city_obj
+        if "city" in data["profile"]:
+            city_obj = get_object_or_404(CityModel, value=data["profile"]["city"])
+            context_["city"] = city_obj
 
         serializer = UserModelSerializer(data=data, context=context_)
         serializer.is_valid(raise_exception=True)
@@ -49,20 +50,16 @@ class UsersListView(ListAPIView):
     filterset_class = UsersFilter
 
     def get(self, request, *args, **kwargs):
-        if request.query_params.get("pk"):
-            searched_id = request.query_params.get("pk")
-            if searched_id.isdigit():
-                user = UserModel.objects.filter(id=searched_id).first()
-                if user:
-                    return Response(UserModelSerializer(user).data, status=status.HTTP_200_OK)
-                else:
-                    return Response("User not found", status=status.HTTP_404_NOT_FOUND)
-            else:
-                return Response("ID must be a number", status=status.HTTP_400_BAD_REQUEST)
-
         if request.query_params.get("email"):
             searched_email = request.query_params.get("email")
             user = UserModel.objects.filter(email=searched_email).first()
+            if user:
+                return Response(UserModelSerializer(user).data, status=status.HTTP_200_OK)
+            else:
+                return Response("User not found", status=status.HTTP_404_NOT_FOUND)
+        if request.query_params.get("surname"):
+            searched_surname = request.query_params.get("surname")
+            user = UserModel.objects.filter(surname=searched_surname).first()
             if user:
                 return Response(UserModelSerializer(user).data, status=status.HTTP_200_OK)
             else:
@@ -122,21 +119,21 @@ class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         )
 
 
-class UserToStaffView(GenericAPIView):
-    """
-    patch:
-        update user staff status to true;
-    """
-    queryset = UserModel.objects.all()
-    serializer_class = UserModelSerializer
-    permission_classes = [IsAdmin]
-    http_method_names = ["patch"]
-
-    def patch(self, *args, **kwargs):
-        user = self.get_object()
-        user.is_staff = True
-        user.save()
-        return Response(status=status.HTTP_200_OK)
+# class UserToStaffView(GenericAPIView):
+#     """
+#     patch:
+#         update user staff status to true;
+#     """
+#     queryset = UserModel.objects.all()
+#     serializer_class = UserModelSerializer
+#     permission_classes = [IsAdmin]
+#     http_method_names = ["patch"]
+#
+#     def patch(self, *args, **kwargs):
+#         user = self.get_object()
+#         user.is_staff = True
+#         user.save()
+#         return Response(status=status.HTTP_200_OK)
 
 
 class BlockUserView(GenericAPIView):

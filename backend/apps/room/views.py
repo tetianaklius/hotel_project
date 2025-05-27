@@ -62,4 +62,4 @@ class RoomRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = RoomModel.objects.all()
     serializer_class = RoomModelSerializer
     permission_classes = [IsAdmin]
-    http_method_names = ["patch", "delete"]
+    http_method_names = ["get", "patch", "delete"]

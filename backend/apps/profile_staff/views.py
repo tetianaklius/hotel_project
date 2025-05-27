@@ -3,6 +3,7 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from rest_framework.permissions import AllowAny
 
 from apps.profile_staff.models import ProfileStaffModel
 from apps.profile_staff.serializers import ProfileStaffModelSerializer
@@ -12,22 +13,23 @@ from core.permissions.is_manager import IsManager
 UserModel = get_user_model()
 
 
-class UserToDealershipStaffUpdateView(RetrieveUpdateAPIView):  # todo
+class UserToStaffUpdateView(RetrieveUpdateAPIView):  # todo
     serializer_class = ProfileStaffModelSerializer
     queryset = ProfileStaffModel.objects.all()
     permission_classes = [IsAdmin, IsManager]
+    # permission_classes = [AllowAny]
 
     # на тому моменті, коли profile_staff стає is_active=True, працівники додаються до груп;
 
     def update(self, request, *args, **kwargs):
         # method for #1 admins and #2 managers
         user = self.request.user
+        print(user.groups, "****************")
 
         # 1 # if request.user is admin
-        group_name = f"hotel_admin"
-        group = Group.objects.get(name=group_name)
+        group = Group.objects.get(name="hotel_admins")
         if group in user.groups.all():
-            user_to_update = UserModel.objects.get(id=kwargs["user_id"])
+            user_to_update = UserModel.objects.get(id=kwargs["pk"])
             serializer = ProfileStaffModelSerializer(request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(is_active=True)
@@ -45,7 +47,7 @@ class UserToDealershipStaffUpdateView(RetrieveUpdateAPIView):  # todo
                 group = Group.objects.get(name=f"hotel_cleaners")
                 user_to_update.groups.add(group)
             elif serializer.data.role.title == "chef":
-                group = Group.objects.get(name=f"hotel_chef")
+                group = Group.objects.get(name=f"hotel_chefs")
                 user_to_update.groups.add(group)
             else:
                 return Response({
@@ -61,10 +63,10 @@ class UserToDealershipStaffUpdateView(RetrieveUpdateAPIView):  # todo
             )
 
         # 2 # if request.user is manager
-        group_name = f"hotel_manager"
+        group_name = f"hotel_managers"
         group = Group.objects.get(name=group_name)
         if group in user.groups.all():
-            user_to_update = UserModel.objects.get(id=kwargs["user_id"])
+            user_to_update = UserModel.objects.get(id=kwargs["pk"])
             serializer = ProfileStaffModelSerializer(request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(is_active=True)
@@ -76,7 +78,7 @@ class UserToDealershipStaffUpdateView(RetrieveUpdateAPIView):  # todo
                 group = Group.objects.get(name=f"hotel_cleaners")
                 user_to_update.groups.add(group)
             elif serializer.data.role.title == "chef":
-                group = Group.objects.get(name=f"hotel_chef")
+                group = Group.objects.get(name=f"hotel_chefs")
                 user_to_update.groups.add(group)
             else:
                 return Response({
@@ -93,5 +95,5 @@ class UserToDealershipStaffUpdateView(RetrieveUpdateAPIView):  # todo
             return Response(
                 {
                     "Details": "You are neither admin no manager of this platform. "
-                               "You don`t have permission to this action"}, status=status.HTTP_403_FORBIDDEN
+                               "You don`t have permission to do this action"}, status=status.HTTP_403_FORBIDDEN
             )
