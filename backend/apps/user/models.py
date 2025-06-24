@@ -8,7 +8,7 @@ from core.models import BaseModel
 from core.enums.regex_enum import RegexEnum
 
 
-class UserModel(AbstractBaseUser, PermissionsMixin):
+class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
     class Meta:
         db_table = "auth_user"
 

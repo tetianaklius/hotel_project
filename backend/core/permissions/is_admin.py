@@ -5,6 +5,7 @@ class IsAdmin(BasePermission):
     message = "User is not the admin"
 
     def has_permission(self, request, view):
+        print(request.user)
         return (request.user.groups.filter(name="hotel_admins").exists()
 
                 # request.user.is_authenticated

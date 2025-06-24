@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.db import OperationalError, connection
-from django.db.backends.dummy.base import DatabaseWrapper
+from django.db.backends.mysql.base import DatabaseWrapper
 import time
 
 connection: DatabaseWrapper = connection

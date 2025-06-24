@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
-    # 'django.contrib.sessions',
+    'django.contrib.sessions',
     # 'django.contrib.messages',
     "rest_framework",
     "rest_framework_simplejwt",
@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     "apps.city",
     "apps.region",
     "apps.profile_staff",
-    "apps.staff_role"
+    "apps.staff_role",
+    "apps.wishlist"
 ]
 
 MIDDLEWARE = [
@@ -70,7 +71,7 @@ ROOT_URLCONF = 'configs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,6 +85,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'configs.wsgi.application'
+ASGI_APPLICATION = 'configs.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -122,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
@@ -131,7 +133,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/drf_static/"
+STATIC_ROOT=os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = "storage"
+MEDIA_URL = "/api/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

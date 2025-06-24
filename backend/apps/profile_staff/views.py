@@ -9,6 +9,7 @@ from apps.profile_staff.models import ProfileStaffModel
 from apps.profile_staff.serializers import ProfileStaffModelSerializer
 from core.permissions.is_admin import IsAdmin
 from core.permissions.is_manager import IsManager
+from core.permissions.is_superuser import IsSuperUser
 
 UserModel = get_user_model()
 
@@ -16,8 +17,10 @@ UserModel = get_user_model()
 class UserToStaffUpdateView(RetrieveUpdateAPIView):  # todo
     serializer_class = ProfileStaffModelSerializer
     queryset = ProfileStaffModel.objects.all()
-    permission_classes = [IsAdmin, IsManager]
-    # permission_classes = [AllowAny]
+    # permission_classes = [IsSuperUser]
+    # permission_classes = [IsAdmin]
+    # permission_classes = [IsAdmin, IsManager]
+    permission_classes = [AllowAny]
 
     # на тому моменті, коли profile_staff стає is_active=True, працівники додаються до груп;
 
