@@ -15,3 +15,4 @@ client
 /backend/apps/user/migrations/
 /backend/apps/profile_staff/migrations/
 /backend/apps/staff_role/migrations/
+/backend/apps/wishlist/migrations/
