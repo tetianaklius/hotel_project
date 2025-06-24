@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 
+// @ts-ignore  //todo
 import styles from "./HeaderComponent.module.css"
 
 const HeaderComponent: FC = () => {

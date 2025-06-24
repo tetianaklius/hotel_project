@@ -13,11 +13,16 @@ export const RoomDetailsComponent: FC = () => {
     const {roomDetailed} = useAppSelector(state => state.roomsSlice);
 
     return (
-        <div className={styles.room_details_box}>
-            {room?.id}
-            {room?.title}
-            {room?.room_type}
-            {room?.desc}
+        <div>
+            <div className={styles.room_details_box}>
+                {room?.id}
+                {room?.title}
+                {room?.room_type}
+                {room?.desc}
+            </div>
+            <div>
+
+            </div>
         </div>
     );
 };

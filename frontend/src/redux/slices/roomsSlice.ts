@@ -111,5 +111,4 @@ export const roomsActions = {
     loadAllVisibleRooms,
     loadAllRooms,
     loadRoomDetails
-
 }

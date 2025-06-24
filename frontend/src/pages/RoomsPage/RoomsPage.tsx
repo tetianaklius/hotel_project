@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from "react";
 
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {ISearchParams} from "../../models/Search/SearchParams";
@@ -27,6 +27,7 @@ export const RoomsPage = () => {
 
     return (
         <div className={styles.main}>
+            RoomsPage
             <PaginationComponent/>
             <RoomsComponent/>
             <PaginationComponent/>

@@ -1,13 +1,14 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {useDispatch, useSelector} from "react-redux";
 import {roomsSlice} from "./slices/roomsSlice";
+import {usersSlice} from "./slices/usersSlice";
 
 
 export const store = configureStore({
     reducer: {
         roomsSlice: roomsSlice.reducer,
         // bookingsSlice: bookingsSlice.reducer,  // TODO
-        // usersSlice: usersSlice.reducer
+        usersSlice: usersSlice.reducer
     }
 });
 

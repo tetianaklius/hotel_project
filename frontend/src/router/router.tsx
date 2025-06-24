@@ -1,14 +1,13 @@
-import {createBrowserRouter, Navigate, RouteObject} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouteObject,} from "react-router-dom";
 
-import {MainLayout} from "../layouts/MainLayout/MainLayout";
-import {ErrorLayout} from "../layouts/ErrorLayout/ErrorLayout";
-import {RegistrationPage} from "../pages/RegistrationPage/RegistrationPage";
-import {LoginPage} from "../pages/LoginPage/LoginPage";
-import {WelcomePage} from "../pages/WelcomePage/WelcomePage";
-import {RoomsPage} from "../pages/RoomsPage/RoomsPage";
-import {RoomDetailsPage} from "../pages/RoomDetailsPage/RoomDetailsPage";
-import {BookingPage} from "../pages/BookingPage/BookingPage";
-import {SearchRoomsPage} from "../pages/SearchRoomsPage/SearchRoomsPage";
+import {MainLayout} from "../layouts/MainLayout/MainLayout.tsx";
+import {RegistrationPage} from "../pages/RegistrationPage/RegistrationPage.tsx";
+import {LoginPage} from "../pages/LoginPage/LoginPage.tsx";
+import {WelcomePage} from "../pages/WelcomePage/WelcomePage.tsx";
+import {RoomsPage} from "../pages/RoomsPage/RoomsPage.tsx";
+import {RoomDetailsPage} from "../pages/RoomDetailsPage/RoomDetailsPage.tsx";
+import {BookingPage} from "../pages/BookingPage/BookingPage.tsx";
+import {SearchRoomsPage} from "../pages/SearchRoomsPage/SearchRoomsPage.tsx";
 
 
 const routes: RouteObject[] =
@@ -16,7 +15,8 @@ const routes: RouteObject[] =
         {
             path: "/",
             element: <MainLayout/>,
-            errorElement: <ErrorLayout/>,
+            // element: <div>HELLO</div>,
+            // errorElement: <ErrorLayout/>,
             children: [
                 {index: true, element: <Navigate to={"home"}/>},
                 {path: "login",element: <LoginPage/>},

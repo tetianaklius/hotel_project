@@ -1,9 +1,12 @@
+import {ICategory} from "../Category/ICategory";
+import {IRoomType} from "../RoomType/IRoomType";
+
 export interface IRoom {
     id: number,
     is_active: boolean,
     is_visible: boolean,
-    category: ICategory[],
-    room_type: IRoomType[],
+    category: ICategory,
+    room_type: IRoomType,
     title: string,
     floor: number,
     area: number,

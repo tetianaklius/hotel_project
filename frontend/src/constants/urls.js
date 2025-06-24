@@ -14,8 +14,8 @@ export const urls = {
         user_to_staff: (id) => `/users/${id}/to_staff`,
         block_: (id) => `/users/${id}/block`,
         unblock: (id) => `/users/${id}/unblock`,
-
-        // search: (page, params) => `/users?page=${page}&${params}`,
+        search: (page, params) => `/users?page=${page}&${params}`,
+        save_wishlist: () => `/users/save_wishlist`
     },
     rooms: {
         create: "/rooms/create",
@@ -37,6 +37,6 @@ export const urls = {
     bookings: {
         create: "bookings/new",
         all: "/bookings",
-        by_id: `/bookings/${id}`
+        by_id: (id) => `/bookings/${id}`
     }
 }
