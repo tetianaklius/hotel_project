@@ -5,7 +5,7 @@ import {ISearchParams} from "../../models/Search/SearchParams";
 import {roomsActions} from "../../redux/slices/roomsSlice";
 import {RoomsComponent} from "../../components/RoomsComponent/RoomsComponent";
 import PaginationComponent from "../../components/PaginationComponent/PaginationComponent";
-// @ts-ignore  //todo
+
 import styles from "./RoomsPage.module.css";
 
 
@@ -27,7 +27,6 @@ export const RoomsPage = () => {
 
     return (
         <div className={styles.main}>
-            RoomsPage
             <PaginationComponent/>
             <RoomsComponent/>
             <PaginationComponent/>

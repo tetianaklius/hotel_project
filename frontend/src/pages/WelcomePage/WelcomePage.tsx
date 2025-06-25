@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 
-// @ts-ignore
-import styles from "./WelcomePage.module.css"
+import styles from "./WelcomePage.module.css";
 import {WelcomeComponent} from "../../components/WelcomeComponent/WelcomeComponent";
 
 

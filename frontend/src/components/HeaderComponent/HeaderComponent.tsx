@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 
-// @ts-ignore  //todo
 import styles from "./HeaderComponent.module.css"
 
 const HeaderComponent: FC = () => {
@@ -13,11 +12,11 @@ const HeaderComponent: FC = () => {
 
     return (
         <div className={styles.header_common}>
-            <div
-                onClick={() => BackButton()}
-                className={styles.back_button}
-            >Назад&laquo;&laquo;&laquo;
-            </div>
+            {/*<div*/}
+            {/*    onClick={() => BackButton()}*/}
+            {/*    className={styles.back_button}*/}
+            {/*>Назад&laquo;&laquo;&laquo;*/}
+            {/*</div>*/}
             <div className={styles.logo_box}
                  onClick={() => {
                      navigate("home");

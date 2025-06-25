@@ -1,19 +1,42 @@
 .main {
-
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .info_block {
-
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .text_mini {
-
+    font-size: x-large;
+    color: white;
 }
 
 .text_title {
-
+    font-size: 8vh;
+    color: white;
 }
 
 .button_box {
+    height: 5vh;
+    width: 25%;
+    font-size: larger;
+}
 
+.button_review {
+    height: 100%;
+    /*color: white;*/
+    background: white;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

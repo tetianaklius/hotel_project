@@ -1,11 +1,23 @@
 .room_card_dark_theme {
-
+    background: #1f1738;
+    height: 50vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .room_card_light_theme {
-
+    background: rgba(225, 202, 176, 0.46);
+    height: 50vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .title {
-
+    font-size: x-large;
 }

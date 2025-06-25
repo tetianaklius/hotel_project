@@ -17,7 +17,8 @@ export const RoomDetailsComponent: FC = () => {
             <div className={styles.room_details_box}>
                 {room?.id}
                 {room?.title}
-                {room?.room_type}
+                {/*{room?.room_type}*/}
+                {/*{room?.category}*/}
                 {room?.desc}
             </div>
             <div>

@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
 
+import styles from "./FooterComponent.module.css"
+
 const FooterComponent: FC = () => {
     return (
-        <div>
+        <div className={styles.footer_common}>
             FooterComponent
         </div>
     );

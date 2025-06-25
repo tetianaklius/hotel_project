@@ -1,15 +1,15 @@
 import React, {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 
-// @ts-ignore //todo
-import styles from "./RoomCardComponent.module.css";
 import {IRoom} from "../../models/Rooms/IRoom";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {usersActions, usersSlice} from "../../redux/slices/usersSlice";
+import {usersActions} from "../../redux/slices/usersSlice";
+import styles from "./RoomCardComponent.module.css";
 
 
 interface Props {
     room: IRoom;
+    wishlistUpdate: (room: IRoom) => void;
 }
 
 export const RoomCardComponent: FC<Props> = ({room, wishlistUpdate}) => {
