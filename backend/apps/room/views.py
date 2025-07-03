@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny
 from apps.room.filters import RoomsIntFilter, RoomsExtFilter
 from apps.room.models import RoomModel
 from apps.room.serializers import RoomModelSerializer
+from core.pagination.pagination import CustomPagePagination
 from core.permissions.is_admin import IsAdmin
 
 
@@ -26,6 +27,7 @@ class RoomsExtListView(ListAPIView):
     serializer_class = RoomModelSerializer
     permission_classes = [AllowAny]
     filterset_class = RoomsExtFilter
+    pagination_class = CustomPagePagination
 
 
 class RoomsIntListView(ListAPIView):
