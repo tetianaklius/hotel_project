@@ -1,6 +1,6 @@
 import {IUser} from "../../models/Users/IUser";
 import {IUsersPaginated} from "../../models/Users/IUsersPaginated";
-import {IWishlist} from "../../models/Users/IWishlist";
+import {IWishlist} from "../../models/Wishlist/IWishlist";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 import {usersApiService} from "../../services/users.api.service";

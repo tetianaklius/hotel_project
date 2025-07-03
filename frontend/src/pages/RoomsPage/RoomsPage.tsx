@@ -25,6 +25,8 @@ export const RoomsPage = () => {
 
     }, [currentPage]);
 
+    console.log("RoomsPage")
+
     return (
         <div className={styles.main}>
             <PaginationComponent/>

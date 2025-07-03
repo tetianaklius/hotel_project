@@ -1,5 +1,5 @@
 .footer_common {
-    margin: 0;
+    margin-top: auto;
     height: 10vh;
     min-height: 8vh;
     background: linear-gradient(to right, rgb(31, 23, 56), #382c5d);

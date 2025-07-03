@@ -3,9 +3,7 @@ import axios from "axios";
 import {baseURL} from "../constants/urls";
 
 
-// const apiServiceAllowAny = axios.create({baseURL})  // todo
-const apiService = axios.create({baseURL})
-const apiServiceRefresh = axios.create({baseURL})
+const apiService = axios.create({baseURL});
 
 apiService.interceptors.request.use(
     (request) => {
@@ -24,6 +22,4 @@ apiService.interceptors.request.use(
 
 export {
     apiService,
-    // apiServiceAllowAny,
-    apiServiceRefresh,
 }

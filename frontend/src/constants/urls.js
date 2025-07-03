@@ -3,8 +3,8 @@ export const baseURL = "/api"
 export const urls = {
     auth: {
         login: "/auth",
-        // activate: "/auth/activate/",
-        // refresh: "/auth/refresh"
+        activate: "/auth/activate/",
+        refresh: "/auth/refresh"
     },
     users: {
         create: "/users/create",
@@ -36,7 +36,8 @@ export const urls = {
     },
     bookings: {
         create: "bookings/new",
-        all: "/bookings",
+        own_bookings: "bookings/my_bookings",
+        all: "/bookings/admin",
         by_id: (id) => `/bookings/${id}`
     }
 }

@@ -1,13 +1,19 @@
 import React, {FC} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-import styles from "./HeaderComponent.module.css"
+import {authService} from "../../services/auth.api.service";
+import styles from "./HeaderComponent.module.css";
 
 const HeaderComponent: FC = () => {
     const navigate = useNavigate();
 
     const BackButton = () => {
         navigate(-1);
+    }
+
+    const logOut = () => {
+        authService.logout();
+        navigate("/login")
     }
 
     return (
@@ -48,6 +54,9 @@ const HeaderComponent: FC = () => {
                 {/*<div className={styles.navbar_item}>*/}
                 {/*    тема? світла, темна*/}
                 {/*</div>*/}
+                {user.profile.name}
+                <Link to="/profile"> Profile </Link>
+                <button onClick={logOut}> LogOut</button>
 
             </div>
 

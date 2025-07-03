@@ -3,7 +3,9 @@ import {IRoom} from "./IRoom";
 
 export interface IRoomsPaginated {
     page: number,
-    results: IRoom[],
+    prev: boolean,
+    next: boolean,
+    data: IRoom[],
     total_pages?: number
-    total_results?: number,
+    total_items?: number,
 }

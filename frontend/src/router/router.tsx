@@ -7,9 +7,11 @@ import {LoginPage} from "../pages/LoginPage/LoginPage";
 import {WelcomePage} from "../pages/WelcomePage/WelcomePage";
 import {RoomsPage} from "../pages/RoomsPage/RoomsPage";
 import {RoomDetailsPage} from "../pages/RoomDetailsPage/RoomDetailsPage";
-import {BookingPage} from "../pages/BookingPage/BookingPage";
 import {SearchRoomsPage} from "../pages/SearchRoomsPage/SearchRoomsPage";
 import {ErrorLayout} from "../layouts/ErrorLayout/ErrorLayout";
+import {CreateBookingPage} from "../pages/CreateBookingPage/CreateBookingPage";
+import {MyBookingsPage} from "../pages/MyBookingsPage/MyBookingsPage";
+import {BookingsAdminPage} from "../pages/BookingsAdminPage/BookingsAdminPage";
 
 
 const routes: RouteObject[] =
@@ -17,7 +19,6 @@ const routes: RouteObject[] =
         {
             path: "/",
             element: <MainLayout/>,
-            // element: <div>HELLO</div>,
             errorElement: <ErrorLayout/>,
             children: [
                 {index: true, element: <Navigate to={"home"}/>},
@@ -29,7 +30,9 @@ const routes: RouteObject[] =
                 {path: "rooms/search", element: <SearchRoomsPage/>},
                 {path: "rooms/room_details/:id", element: <RoomDetailsPage/>},
 
-                {path: "booking", element: <BookingPage/>},
+                {path: "bookings/new", element: <CreateBookingPage/>},
+                {path: "bookings/my_bookings", element: <MyBookingsPage/>},
+                {path: "bookings/admin", element: <BookingsAdminPage/>},
 
             ]
         }

@@ -1,5 +1,5 @@
-import {ICategory} from "../Category/ICategory";
-import {IRoomType} from "../RoomType/IRoomType";
+import {ICategory} from "../Categories/ICategory";
+import {IRoomType} from "../RoomTypes/IRoomType";
 
 export interface IRoom {
     id: number,

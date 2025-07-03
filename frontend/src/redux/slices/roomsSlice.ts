@@ -52,17 +52,17 @@ const loadAllRooms = createAsyncThunk(
         }
     });
 
-const loadRoomDetails = createAsyncThunk(
-    "roomsSlice/loadRoomDetails",
-    async (id: string, thunkAPI) => {
-        try {
-            const room: IRoom = await roomsService.getByIdVisible(id);
-            return thunkAPI.fulfillWithValue(room);
-        } catch (e) {
-            const error = e as AxiosError;
-            return thunkAPI.rejectWithValue(error.response?.data);
-        }
-    });
+// const loadRoomDetails = createAsyncThunk(
+//     "roomsSlice/loadRoomDetails",
+//     async (id: string, thunkAPI) => {
+//         try {
+//             const room: IRoom = await roomsService.getByIdVisible(id);
+//             return thunkAPI.fulfillWithValue(room);
+//         } catch (e) {
+//             const error = e as AxiosError;
+//             return thunkAPI.rejectWithValue(error.response?.data);
+//         }
+//     });
 
 
 export const roomsSlice = createSlice({
@@ -80,7 +80,10 @@ export const roomsSlice = createSlice({
             },
             changeTheme: (state, action) => {
                 state.useDarkTheme = action.payload;
-            }  // todo
+            },  // todo
+            saveCurrentRoom: (state, action) => {
+                state.roomDetailed = action.payload;
+            }
         },
         extraReducers: builder =>
             builder
@@ -96,12 +99,12 @@ export const roomsSlice = createSlice({
                 .addCase(loadAllRooms.rejected, (state, action) => {
                     ///  todo
                 })
-                .addCase(loadRoomDetails.fulfilled, (state, action: PayloadAction<IRoom>) => {
-                    state.room = action.payload;
-                })
-                .addCase(loadRoomDetails.rejected, (state, action) => {
-                    ///  todo
-                })
+                // .addCase(loadRoomDetails.fulfilled, (state, action: PayloadAction<IRoom>) => {
+                //     state.room = action.payload;
+                // })
+                // .addCase(loadRoomDetails.rejected, (state, action) => {
+                //     ///  todo
+                // })
 
     }
 )
@@ -110,5 +113,4 @@ export const roomsActions = {
     ...roomsSlice.actions,
     loadAllVisibleRooms,
     loadAllRooms,
-    loadRoomDetails
 }
