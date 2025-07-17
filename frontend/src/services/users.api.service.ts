@@ -2,8 +2,9 @@ import {apiService} from "./api.service";
 import {IUsersPaginated} from "../models/Users/IUsersPaginated";
 import {urls} from "../constants/urls";
 import {IUser} from "../models/Users/IUser";
-import {IWishlist} from "../models/Users/IWishlist";
 import {IRoomsPaginated} from "../models/Rooms/IRoomsPaginated";
+import {IWishlist} from "../models/Wishlist/IWishlist";
+import {IProfile} from "../models/Users/IProfile";
 
 export const usersApiService = {
     create:
@@ -19,8 +20,8 @@ export const usersApiService = {
         const response = await apiService.get<IUser>(urls.users.byId(+id));
         return response.data;
     },
-    own_profile: async (): Promise<IUser> => {
-        const response = await apiService.get<IUser>(urls.users.own_profile);
+    own_profile: async (): Promise<IProfile> => {
+        const response = await apiService.get<IProfile>(urls.users.own_profile);
         return response.data;
     },
     user_to_staff: async (id: string): Promise<IUser> => {
@@ -40,7 +41,7 @@ export const usersApiService = {
         return response.data;
     },
     saveWishlist: async (roomsPag:IRoomsPaginated): Promise<IWishlist> => {
-        const response = await apiService.put<IWishlist>(urls.users.save_wishlist(roomsPag))
+        const response = await apiService.put<IWishlist>(urls.users.save_wishlist())
         return response.data;  // todo
     }
 }

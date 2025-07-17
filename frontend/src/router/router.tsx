@@ -12,6 +12,7 @@ import {ErrorLayout} from "../layouts/ErrorLayout/ErrorLayout";
 import {CreateBookingPage} from "../pages/CreateBookingPage/CreateBookingPage";
 import {MyBookingsPage} from "../pages/MyBookingsPage/MyBookingsPage";
 import {BookingsAdminPage} from "../pages/BookingsAdminPage/BookingsAdminPage";
+import {ProfilePage} from "../pages/ProfilePage/ProfilePage";
 
 
 const routes: RouteObject[] =
@@ -25,6 +26,7 @@ const routes: RouteObject[] =
                 {path: "login", element: <LoginPage/>},
                 {path: "registration", element: <RegistrationPage/>},
                 {path: "home", element: <WelcomePage/>},
+                {path: "profile", element: <ProfilePage/>},
 
                 {path: "rooms", element: <RoomsPage/>},
                 {path: "rooms/search", element: <SearchRoomsPage/>},

@@ -2,12 +2,13 @@ import {IProfile} from "../Users/IProfile";
 import {IRoom} from "../Rooms/IRoom";
 
 export interface IBooking {
-    id:number,
+    id: number,
     status: string,
     user_profile: IProfile
     room: IRoom,
-    start_date: Date,
-    end_date: Date,
+    // date_range: DateRange<Dayjs>,
+    start_date: string,
+    end_date: string,
     persons: number,
     comment: string,
     comment_internal: string,

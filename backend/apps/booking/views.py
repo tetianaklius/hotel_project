@@ -6,7 +6,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from apps.booking.models import BookingModel
 from apps.booking.serializers import BookingModelSerializer, BookingUpdateModelSerializer, BookingModelAdminSerializer
@@ -22,12 +22,13 @@ class BookingCreateView(CreateAPIView):
     """
     queryset = BookingModel.objects.all()
     serializer_class = BookingModelSerializer
-    permission_classes = [IsAuthenticated, IsAdmin]
+    # permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
-        filter_params = dict(booked_end_date__date__lte=kwargs["end_date"],
-                             booked_start_date__date__gte=kwargs["start_date"])
+        filter_params = dict(end_date__date__lte=kwargs["end_date"],
+                             start_date__date__gte=kwargs["start_date"])
         is_occupied = BookingModel.objects.filter(**filter_params, room__id=kwargs["room"]).exists()
 
         try:
@@ -41,17 +42,17 @@ class BookingCreateView(CreateAPIView):
                 )
             else:
                 # return super().post(request, *args, **kwargs)
-                if IsAdmin():
-                    booking_owner_id = self.request.data.get("user_profile")
-                    user_profile = ProfileModel.objects.get(pk=booking_owner_id)
-                    serializer = BookingModelAdminSerializer(data=request.data, user_profile=user_profile)
-                else:
-                    user_profile = user.profile
-                    serializer = self.get_serializer(data=request.data, user_profile=user_profile)
+                # if IsAdmin():
+                #     booking_owner_id = self.request.data.get("user_profile")
+                #     user_profile = ProfileModel.objects.get(pk=booking_owner_id)
+                #     serializer = BookingModelAdminSerializer(data=request.data, user_profile=user_profile)
+                # else:
+                user_profile = user.profile
+                serializer = self.get_serializer(data=request.data, user_profile=user_profile)
 
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except:
             return Response({"Вибачте, виникла помилка. Спробуйте ще раз, будь ласка."})

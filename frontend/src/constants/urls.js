@@ -13,7 +13,7 @@ export const urls = {
         own_profile: "/users/my_profile",
         user_to_staff: (id) => `/users/${id}/to_staff`,
         block_: (id) => `/users/${id}/block`,
-        unblock: (id) => `/users/${id}/unblock`,
+        unblock_: (id) => `/users/${id}/unblock`,
         search: (page, params) => `/users?page=${page}&${params}`,
         save_wishlist: () => `/users/save_wishlist`
     },

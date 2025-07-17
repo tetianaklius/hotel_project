@@ -64,6 +64,19 @@ const loadBookingById = createAsyncThunk(
     }
 )
 
+const createBooking = createAsyncThunk(
+    "bookingsSlice/createBooking",
+    async (new_booking: IBooking, thunkAPI) => {
+        try {
+            const booking: IBooking = await bookingService.create(new_booking);
+            return thunkAPI.fulfillWithValue(booking);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(error.response?.data);
+        }
+    });
+
+
 export const bookingsSlice = createSlice({
         name: "bookingsSlice",
         initialState: bookingsInitState,
@@ -98,6 +111,12 @@ export const bookingsSlice = createSlice({
                 .addCase(loadOwnBookings.rejected, (state, action) => {
                     ///  todo
                 })
+                .addCase(createBooking.fulfilled, (state, action: PayloadAction<IBooking>) => {
+                    state.currentBooking = action.payload;
+                })
+                .addCase(createBooking.rejected, (state, action) => {
+                    ///  todo
+                })
 
     }
 )
@@ -106,5 +125,6 @@ export const bookingsActions = {
     ...bookingsSlice.actions,
     loadAllBookings,
     loadOwnBookings,
-    loadBookingById
+    loadBookingById,
+    createBooking
 }
