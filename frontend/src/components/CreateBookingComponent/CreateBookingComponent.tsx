@@ -26,8 +26,8 @@ export const CreateBookingComponent = () => {
     const room = location.state.room;
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = React.useState<dayjs.Dayjs>(dayjs(new Date()));
-    const [endDate, setEndDate] = React.useState<dayjs.Dayjs>(dayjs(new Date()));
+    const [startDate, setStartDate] = React.useState<dayjs.Dayjs>(dayjs("2025-07-28"));
+    const [endDate, setEndDate] = React.useState<dayjs.Dayjs>(dayjs("2025-07-28"));
     const [error, setError] = React.useState("");
 
 
@@ -40,15 +40,19 @@ export const CreateBookingComponent = () => {
     const save = async (new_booking: IBooking) => {
         try {
             new_booking["room"] = room;
-            new_booking["start_date"] = startDate.format("DD.MM.YYYY");
-            new_booking["end_date"] = endDate.format("DD.MM.YYYY");
+            // new_booking["start_date"] = startDate.format("DD.MM.YYYY");
+            // new_booking["start_date"] = startDate.format("YYYY-MM-DD");
+            new_booking["start_date"] = startDate.format("YYYY-MM-DD");
+            new_booking["end_date"] = endDate.format("YYYY-MM-DD");
+                   console.log(new_booking, "************")
             await bookingService.create(new_booking).then(data => {
                 dispatch(bookingsSlice.actions.setCurrentBooking(new_booking));
                 bookingsActions.createBooking(new_booking);
                 navigate("/bookings/my_bookings");
             })
         } catch (err) {
-            setError(([{"err_message": err.message}]) + JSON.stringify([{"err_message": err.response.data}]))
+            // setError(([{"err_message": err.message}]) + JSON.stringify([{"err_message": err.response.data}]))
+            setError(JSON.stringify([{"err_message": err.message}]));
 
         }
     }

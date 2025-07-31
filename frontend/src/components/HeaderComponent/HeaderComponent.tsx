@@ -7,7 +7,7 @@ import {useAppSelector} from "../../redux/store";
 
 export const HeaderComponent: FC = () => {
     const navigate = useNavigate();
-    const {currentUser: user} = useAppSelector(state => state.usersSlice);
+    const {currentUserProfile} = useAppSelector(state => state.usersSlice);
 
     const BackButton = () => {
         navigate(-1);
@@ -59,21 +59,38 @@ export const HeaderComponent: FC = () => {
                 <div className={styles.navbar_item}>
                     Мова (укр, англ)
                 </div>
-                // todo
+                {/*// todo*/}
                 {/*mode*/}
                 <div className={styles.navbar_item}>
-                    тема? світла, темна
+                    тема
                 </div>
-                // todo
-                {user?.profile?.name ?
-                    <div>
-                        <Link to="/profile">Мій акаунт</Link>
-                        <button onClick={logOut}>Вийти</button>
+                {/*// todo*/}
+                {currentUserProfile ?
+                    // <div className={styles.login_items}>
+                    <div className={styles.account_box}>
+                        <div className={styles.navbar_item}
+                             onClick={() => {
+                                 navigate("/profile");
+                             }}>Мій акаунт
+                        </div>
+                        <div className={styles.navbar_item}
+                             onClick={() => {
+                                 logOut()
+                             }}>Вийти
+                        </div>
                     </div>
                     :
-                    <div>
-                        <Link to="/login">Увійти</Link>
-                        <Link to="/registration">Зареєструватись</Link>
+                    <div className={styles.account_box}>
+                        <div
+                             onClick={() => {
+                                 navigate("/login");
+                             }}>Увійти
+                        </div>
+                        <div
+                             onClick={() => {
+                                 navigate("/registration");
+                             }}>Зареєструватись
+                        </div>
                     </div>
                 }
             </div>

@@ -4,6 +4,9 @@ import React, {useEffect, useState} from "react";
 
 import {authService} from "../../services/auth.api.service";
 import styles from "./LoginComponent.module.css";
+import {useAppDispatch} from "../../redux/store";
+import {usersActions} from "../../redux/slices/usersSlice";
+import {IUser} from "../../models/Users/IUser";
 // import {useAppDispatch} from "../../redux/store";
 
 
@@ -11,7 +14,7 @@ export const LoginComponent = () => {
     const location = useLocation();
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -21,7 +24,7 @@ export const LoginComponent = () => {
         try {
             await authService.login(user)
             console.log("login done")
-            // dispatch(usersActions.setCurrentUser(user))
+            dispatch(usersActions.setCurrentUser(user as IUser))
             navigate("/rooms");
         } catch (err) {
             setError(JSON.stringify([{"err_message": err.message}, err.response.data]))

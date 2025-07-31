@@ -9,7 +9,7 @@ export const BookingComponent: FC<IProps> = ({booking}) => {
     return (
         <div>
             <div>booking id: {booking.id}</div>
-            <div>room: {booking.room.title}</div>
+            {/*<div>room: {booking.room.title}</div>*/}
             <div>comment: {booking.comment}</div>
             <div>for {booking.persons} persons</div>
         </div>

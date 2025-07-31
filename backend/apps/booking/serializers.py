@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
 from apps.booking.models import BookingModel
-from apps.user.models import ProfileModel
 
 
 class BookingModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingModel
-        fields = ("id", "status", "room", "persons", "comment", "start_date", "end_date", "prepayment", "payment")
+        fields = (
+        "id", "status", "room", "persons", "comment", "start_date", "end_date", "prepayment", "payment", "user_profile")
         read_only_fields = ("id", "created_at", "updated_at", "user_profile")
 
 

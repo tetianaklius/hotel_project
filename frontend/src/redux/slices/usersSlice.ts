@@ -87,10 +87,10 @@ export const usersSlice = createSlice({
                 // state.userWishlist.rooms = [...state.userWishlist?.rooms, action.payload];
                 // state.userWishlist = action.payload;
             },
-            // setCurrentUser: (state, action: PayloadAction<IUser>) => {
-            //     state.currentUser = action.payload;
-            //     state.currentUserProfile = action.payload.profile;
-            // }
+            setCurrentUser: (state, action: PayloadAction<IUser>) => {
+                state.currentUser = action.payload;
+                state.currentUserProfile = action.payload.profile;
+            }
         },
         extraReducers: builder =>
             builder
