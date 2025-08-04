@@ -7,8 +7,12 @@ class BookingModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingModel
         fields = (
-        "id", "status", "room", "persons", "comment", "start_date", "end_date", "prepayment", "payment", "user_profile")
-        read_only_fields = ("id", "created_at", "updated_at", "user_profile")
+            "id", "status", "room", "persons", "comment", "start_date", "end_date", "prepayment", "payment",
+            "user_profile"
+        )
+        read_only_fields = ("id", "created_at", "updated_at",
+                            "user_profile"
+                            )
 
 
 class BookingModelAdminSerializer(serializers.ModelSerializer):

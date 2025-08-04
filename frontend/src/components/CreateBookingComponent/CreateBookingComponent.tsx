@@ -30,18 +30,9 @@ export const CreateBookingComponent = () => {
     const [endDate, setEndDate] = React.useState<dayjs.Dayjs>(dayjs("2025-07-28"));
     const [error, setError] = React.useState("");
 
-
-    // // 2
-    // const startValue: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    // const endValue: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 10);
-    // // 2
-
-
     const save = async (new_booking: IBooking) => {
         try {
-            new_booking["room"] = room;
-            // new_booking["start_date"] = startDate.format("DD.MM.YYYY");
-            // new_booking["start_date"] = startDate.format("YYYY-MM-DD");
+            new_booking["room"] = room.id;
             new_booking["start_date"] = startDate.format("YYYY-MM-DD");
             new_booking["end_date"] = endDate.format("YYYY-MM-DD");
                    console.log(new_booking, "************")
@@ -56,7 +47,6 @@ export const CreateBookingComponent = () => {
 
         }
     }
-
 
     return (
         <div className={styles.component_wrap}>

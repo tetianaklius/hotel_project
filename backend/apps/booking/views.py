@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from datetime import datetime
 
 from apps.booking.models import BookingModel
 from apps.booking.serializers import BookingModelSerializer, BookingUpdateModelSerializer, BookingModelAdminSerializer
@@ -69,16 +70,27 @@ class BookingCreateView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        user = self.request.user
+        # user = self.request.user
         try:
-            user_profile = user.profile
-            serializer = self.get_serializer(data=request.data, user_profile=user_profile)
-
+            # user_profile = user.profile
+            # dates
+            print("1", request.data)
+            start_date_str = request.data["start_date"]
+            start_date_obj = datetime.strptime(start_date_str, "%Y-%m-%d")
+            request.data["start_date"] = start_date_obj.date()
+            end_date_str = request.data["end_date"]
+            end_date_obj = datetime.strptime(end_date_str, "%Y-%m-%d")
+            request.data["end_date"] = end_date_obj.date()
+            print("2", request.data)
+            #
+            # serializer = self.get_serializer(data=request.data, user_profile=user_profile)
+            serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except:
-            return Response({"Вибачте, виникла помилка. Спробуйте ще раз, будь ласка."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Вибачте, виникла помилка. Спробуйте ще раз, будь ласка."},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class BookingsListView(ListAPIView):
