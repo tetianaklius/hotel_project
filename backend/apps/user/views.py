@@ -109,7 +109,7 @@ class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         user = self.request.user
         user_to_delete = self.get_object()
         if user.is_authenticated and user.id == user_to_delete.id:  # todo чи треба перевіряти ще раз
-            user_to_delete.delete()    # todo архівувати дані чи зробити користувача неактивним
+            user_to_delete.delete()  # todo архівувати дані чи зробити користувача неактивним
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(
             {
@@ -182,6 +182,12 @@ class GetOwnProfileView(GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, *args, **kwargs):
-        user = UserModel.objects.get(id=self.request.user.id)
-        serializer = OwnProfileSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # user = UserModel.objects.get(id=self.request.user.id)
+        try:
+            profile = ProfileModel.objects.get(id=self.request.user.id)
+            serializer = OwnProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except:
+            return Response({"details": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+

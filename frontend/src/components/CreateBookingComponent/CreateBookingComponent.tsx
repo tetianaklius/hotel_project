@@ -26,16 +26,17 @@ export const CreateBookingComponent = () => {
     const room = location.state.room;
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = React.useState<dayjs.Dayjs>(dayjs("2025-07-28"));
-    const [endDate, setEndDate] = React.useState<dayjs.Dayjs>(dayjs("2025-07-28"));
+    const [startDate, setStartDate] = React.useState<dayjs.Dayjs>(dayjs(Date.now()));
+    const [endDate, setEndDate] = React.useState<dayjs.Dayjs>(dayjs(Date.now()));
     const [error, setError] = React.useState("");
 
     const save = async (new_booking: IBooking) => {
         try {
             new_booking["room"] = room.id;
+            // new_booking["persons"] = Number(new_booking["persons"]);
             new_booking["start_date"] = startDate.format("YYYY-MM-DD");
             new_booking["end_date"] = endDate.format("YYYY-MM-DD");
-                   console.log(new_booking, "************")
+            console.log("frontend", "\n", new_booking, "\n", "************")
             await bookingService.create(new_booking).then(data => {
                 dispatch(bookingsSlice.actions.setCurrentBooking(new_booking));
                 bookingsActions.createBooking(new_booking);

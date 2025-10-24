@@ -1,6 +1,6 @@
 # може створювати користувач/адмін
 # може переглядати користувач/адмін
-# редагувати адмін (або користувач з підтвердженням адміна?)
+# редагувати адмін
 # скасувати користувач/адмін (+1 скасування додається до id користувача; вн. інф.)
 
 from rest_framework.response import Response
@@ -66,27 +66,45 @@ class BookingCreateView(CreateAPIView):
     """
     queryset = BookingModel.objects.all()
     serializer_class = BookingModelSerializer
-    # permission_classes = [IsAuthenticated, IsAdmin]
+    # permission_classes = [IsAuthenticated]
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        # user = self.request.user
+        user = request.user
+        print(user.id)
+        # filter_params = dict(end_date__date__lte=kwargs["end_date"],
+        #                      start_date__date__gte=kwargs["start_date"])
+        # is_booked = BookingModel.objects.filter(**filter_params, room__id=kwargs["room"]).exists()
+
         try:
-            # user_profile = user.profile
+            # print("post backend")
+            # if is_booked:
+            #     return Response({
+            #         "Цей номер вже хтось забронював. Спробуйте змінити дати або обрати інший номер. "
+            #         "Або ж скористайтеся пошуком серед усіх номерів на зручний для Вас період. Для цього в основному меню (вгорі сторінки) натисніть 'забронювати'."
+            #         # todo
+            #     }, status=status.HTTP_200_OK)
+            #
+            # else:
+            #     super().post(request, *args, **kwargs)
+
             # dates
-            print("1", request.data)
+            print("backend, request.data before", "\n", request.data)
             start_date_str = request.data["start_date"]
             start_date_obj = datetime.strptime(start_date_str, "%Y-%m-%d")
             request.data["start_date"] = start_date_obj.date()
             end_date_str = request.data["end_date"]
             end_date_obj = datetime.strptime(end_date_str, "%Y-%m-%d")
             request.data["end_date"] = end_date_obj.date()
-            print("2", request.data)
+            print("backend, request.data transformed", "\n", request.data)
             #
-            # serializer = self.get_serializer(data=request.data, user_profile=user_profile)
+            print(user)
+            request.data["user_profile"] = user.id
+
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            print("serializer passed")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except:
             return Response({"Вибачте, виникла помилка. Спробуйте ще раз, будь ласка."},

@@ -5,8 +5,6 @@ import {IUser} from "../../models/Users/IUser";
 import {IUsersPaginated} from "../../models/Users/IUsersPaginated";
 import {IWishlist} from "../../models/Wishlist/IWishlist";
 import {usersApiService} from "../../services/users.api.service";
-import {IRoomsPaginated} from "../../models/Rooms/IRoomsPaginated";
-import {IRoom} from "../../models/Rooms/IRoom";
 import {IProfile} from "../../models/Users/IProfile";
 
 type UsersSliceType = {
@@ -18,6 +16,7 @@ type UsersSliceType = {
     currentPage: number,
     page: number,  // todo
     useDarkTheme: boolean  // TODO
+    headerAuth:boolean,
 }
 
 const usersInitState: UsersSliceType = {
@@ -28,8 +27,10 @@ const usersInitState: UsersSliceType = {
     isLoaded: false,
     currentPage: 1,
     page: 1,  // todo
-    useDarkTheme: false  // TODO
+    useDarkTheme: false, // TODO
+    headerAuth:false
 }
+
 
 const loadAllUsers = createAsyncThunk(
     "usersSlice/loadAllUsers",
@@ -55,19 +56,6 @@ const loadOwnProfile = createAsyncThunk(
         }
     });
 
-const saveUserWishlist = createAsyncThunk(
-    "usersSlice/saveUserWishlist",
-    async (roomsPag: IRoomsPaginated, thunkAPI) => {
-        try {  // todo
-            const wishlist: IWishlist = await usersApiService.saveWishlist(roomsPag);
-            return thunkAPI.fulfillWithValue(wishlist);  // todo
-        } catch (e) {
-            const error = e as AxiosError;
-            return thunkAPI.rejectWithValue(error.response?.data);
-        }
-    });
-
-
 export const usersSlice = createSlice({
         name: "usersSlice",
         initialState: usersInitState,
@@ -81,16 +69,19 @@ export const usersSlice = createSlice({
             changeTheme: (state, action) => {   // todo
                 state.useDarkTheme = action.payload;
             },
-            updateWishlist: (state, action: PayloadAction<IRoom>) => {   // todo
-                state.userWishlist = state.userWishlist?.rooms.results.push(action.payload);
-                // state.userWishlist = [...state, action.payload];  // TODO
-                // state.userWishlist.rooms = [...state.userWishlist?.rooms, action.payload];
-                // state.userWishlist = action.payload;
+            changeHeader: (state, action) => {   // todo
+                state.headerAuth = action.payload;
             },
-            setCurrentUser: (state, action: PayloadAction<IUser>) => {
-                state.currentUser = action.payload;
-                state.currentUserProfile = action.payload.profile;
-            }
+            // updateWishlist: (state, action: PayloadAction<IRoom>) => {   // todo
+            //     state.userWishlist = state.userWishlist?.rooms.results.push(action.payload);
+            //     // state.userWishlist = [...state, action.payload];  // TODO
+            //     // state.userWishlist.rooms = [...state.userWishlist?.rooms, action.payload];
+            //     // state.userWishlist = action.payload;
+            // },
+            // setCurrentUser: (state, action: PayloadAction<IUser>) => {
+            //     state.currentUser = action.payload;
+            //     state.currentUserProfile = action.payload.profile;
+            // }
         },
         extraReducers: builder =>
             builder
@@ -103,13 +94,9 @@ export const usersSlice = createSlice({
                 .addCase(loadOwnProfile.fulfilled, (state, action: PayloadAction<IProfile>) => {
                     state.currentUserProfile = action.payload;
                 })
-                // .addCase(loadOwnProfile.rejected, (state, action) => {
-                //     ///  todo
-                // })
-                .addCase(saveUserWishlist.fulfilled, (state, action: PayloadAction<IWishlist>) => {
-                    state.userWishlist = action.payload;
+                .addCase(loadOwnProfile.rejected, (state, action) => {
+                //  todo
                 })
-
     }
 )
 
@@ -117,5 +104,4 @@ export const usersActions = {
     ...usersSlice.actions,
     loadAllUsers,
     loadOwnProfile,
-    saveUserWishlist
 }

@@ -1,24 +1,30 @@
 import React, {FC} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {authService} from "../../services/auth.api.service";
 import styles from "./HeaderComponent.module.css";
-import {useAppSelector} from "../../redux/store";
+import {useAppDispatch} from "../../redux/store";
+import {usersActions} from "../../redux/slices/usersSlice";
 
 export const HeaderComponent: FC = () => {
     const navigate = useNavigate();
-    const {currentUserProfile} = useAppSelector(state => state.usersSlice);
+    const dispatch = useAppDispatch();
+    const isAuth = localStorage.getItem("refresh");
+    // const isAuth = authService.getRefreshToken();
 
     const BackButton = () => {
         navigate(-1);
     }
 
-    const logOut = () => {
+    const logOut = async () => {
         authService.logout();
-        navigate("/login")
+        navigate("/login");
+        await dispatch(usersActions.changeHeader(false));
     }
+    console.log(localStorage)
 
     return (
+
         <div className={styles.header_common}>
             <div
                 onClick={() => BackButton()}
@@ -65,7 +71,7 @@ export const HeaderComponent: FC = () => {
                     тема
                 </div>
                 {/*// todo*/}
-                {currentUserProfile ?
+                {isAuth ?
                     // <div className={styles.login_items}>
                     <div className={styles.account_box}>
                         <div className={styles.navbar_item}
@@ -82,14 +88,14 @@ export const HeaderComponent: FC = () => {
                     :
                     <div className={styles.account_box}>
                         <div
-                             onClick={() => {
-                                 navigate("/login");
-                             }}>Увійти
+                            onClick={() => {
+                                navigate("/login");
+                            }}>Увійти
                         </div>
                         <div
-                             onClick={() => {
-                                 navigate("/registration");
-                             }}>Зареєструватись
+                            onClick={() => {
+                                navigate("/registration");
+                            }}>Зареєструватись
                         </div>
                     </div>
                 }

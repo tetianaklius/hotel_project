@@ -28,7 +28,7 @@ const authService = {
         return data;
     },
 
-    async login(user: object) {
+    async login(user:object) {
         const {data} = await apiService.post(urls.auth.login, user);
         this.setTokens(data);
     },
@@ -50,6 +50,15 @@ const authService = {
     getRefreshToken() {
         return localStorage.getItem(_refreshTokenKey);
     },
+
+    currentUserProfile: async () => {
+        try {
+            const response = await apiService.get(urls.users.own_profile)
+            return response.data;
+        } catch (err) {
+            return err.response
+        }
+    }
 };
 
 export {

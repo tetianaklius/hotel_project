@@ -66,14 +66,13 @@ class UserModelSerializer(serializers.ModelSerializer):
 
 
 class OwnProfileSerializer(serializers.ModelSerializer):
-    profile = ProfileModelSerializer()
+    # profile = ProfileModelSerializer()
 
     class Meta:
-        model = UserModel
+        model = ProfileModel
         fields = (
-            "id", "profile",
+            "name", "surname", "age", "phone", "city"
         )
         read_only_fields = (
             "id",
         )
-        depth = 1

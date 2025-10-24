@@ -10,9 +10,7 @@ class BookingModelSerializer(serializers.ModelSerializer):
             "id", "status", "room", "persons", "comment", "start_date", "end_date", "prepayment", "payment",
             "user_profile"
         )
-        read_only_fields = ("id", "created_at", "updated_at",
-                            "user_profile"
-                            )
+        read_only_fields = ("id", "status", "created_at", "updated_at", "prepayment", "payment")
 
 
 class BookingModelAdminSerializer(serializers.ModelSerializer):
